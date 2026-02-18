@@ -1,0 +1,27 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-18T19:25:13.148Z",
+  "summary": "The diff implements content moderation for profile bios and reel descriptions. Backend validation logic with a profanity filter was added in main.mo. Frontend components (ProfileSetupModal, ProfileEditForm, ReelUploadForm) now display validation errors and prevent submission on inappropriate content. Error handling in useQueries.ts extracts backend validation messages. All four requirements appear to be implemented.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Added migration.mo file with empty migration logic",
+      "reason": "Migration logic was not requested in any requirement. The BuildRequest does not mention database migration or state migration needs.",
+      "evidence": [
+        "backend/migration.mo"
+      ]
+    }
+  ],
+  "confidence": 0.92,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/components/ProfileEditForm.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/components/ReelUploadForm.tsx",
+    "frontend/src/hooks/useQueries.ts",
+    "project_state.json"
+  ]
+}

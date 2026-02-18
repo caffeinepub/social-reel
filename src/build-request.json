@@ -1,0 +1,94 @@
+{
+  "kind": "build_request",
+  "title": "Implement content moderation for polite language across platform",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Add content validation to profile bio field that checks for inappropriate language before allowing profile creation or updates",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-user-polite-language"
+        ],
+        "quotes": [
+          "Polite language to be used"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Profile bio submissions are validated for inappropriate language",
+        "Inappropriate content in bios is rejected with a clear error message",
+        "Valid bios pass through without modification"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add content validation to reel description field that checks for inappropriate language before allowing reel uploads",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-user-polite-language"
+        ],
+        "quotes": [
+          "Polite language to be used"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Reel descriptions are validated for inappropriate language",
+        "Inappropriate content in descriptions is rejected with a clear error message",
+        "Valid descriptions pass through without modification"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Update ProfileSetupModal and ProfileEditForm components to display user-friendly error messages when content validation fails",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-polite-language"
+        ],
+        "quotes": [
+          "Polite language to be used"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Validation errors are displayed clearly to users",
+        "Error messages guide users to correct their content",
+        "Form submission is prevented when validation fails"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Update ReelUploadForm component to display user-friendly error messages when description content validation fails",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-polite-language"
+        ],
+        "quotes": [
+          "Polite language to be used"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Validation errors are displayed clearly to users",
+        "Error messages guide users to correct their description",
+        "Upload submission is prevented when validation fails"
+      ]
+    }
+  ],
+  "constraints": [
+    "Content moderation must not modify or censor user content, only accept or reject it",
+    "Validation must occur on the backend to ensure security",
+    "Error messages must be respectful and constructive"
+  ],
+  "nonGoals": [
+    "Implementing AI-based content moderation",
+    "Adding reporting or flagging functionality",
+    "Moderating video content itself",
+    "Creating an admin dashboard for content review"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

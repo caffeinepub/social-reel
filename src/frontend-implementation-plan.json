@@ -1,0 +1,54 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Implement content moderation for polite language across platform",
+  "requirements": [
+    {
+      "id": "REQ-9",
+      "summary": "Update ProfileSetupModal and ProfileEditForm to display validation error messages when bio contains inappropriate language",
+      "acceptanceCriteria": [
+        "Validation errors are displayed clearly to users",
+        "Error messages guide users to correct their content",
+        "Form submission is prevented when validation fails"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "modify",
+          "description": "Add error state handling to display validation errors from the backend when inappropriate language is detected in the bio field. Show user-friendly error messages that guide users to correct their content. Prevent form submission when validation fails by handling backend error responses from saveCallerUserProfile mutation."
+        },
+        {
+          "path": "frontend/src/components/ProfileEditForm.tsx",
+          "operation": "modify",
+          "description": "Add error state handling to display validation errors from the backend when inappropriate language is detected in the bio field. Show user-friendly error messages that guide users to correct their content. Prevent form submission when validation fails by handling backend error responses from saveCallerUserProfile mutation."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Update the useSaveCallerUserProfile mutation hook to properly handle and expose backend validation errors. Ensure error messages from backend traps are accessible to components for display to users."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Update ReelUploadForm to display validation error messages when description contains inappropriate language",
+      "acceptanceCriteria": [
+        "Validation errors are displayed clearly to users",
+        "Error messages guide users to correct their description",
+        "Upload submission is prevented when validation fails"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ReelUploadForm.tsx",
+          "operation": "modify",
+          "description": "Add error state handling to display validation errors from the backend when inappropriate language is detected in the description field. Show user-friendly error messages that guide users to correct their description. Prevent upload submission when validation fails by handling backend error responses from uploadReel mutation."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Update the useUploadReel mutation hook to properly handle and expose backend validation errors. Ensure error messages from backend traps are accessible to components for display to users."
+        }
+      ]
+    }
+  ]
+}

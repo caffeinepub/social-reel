@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Social media app similar to Instagram with user registration, reels, and video content",
+  "architectural_notes": [
+    "Social media platform requiring user authentication",
+    "Video content delivery system needed",
+    "Short-form video (reels) and standard video support required",
+    "Content moderation system needed to enforce polite language usage"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-user-registration-and-authentication-system-using-internet-identity-that-allows-users-to-create-and-manage-their-accounts",
+      "title": "Implement user registration and authentication system using Internet Identity that allows users to create and manage their accounts",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-user-profile-system-with-username-bio-and-profile-picture-support",
+      "title": "Create user profile system with username, bio, and profile picture support",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-reels-functionality-that-allows-users-to-upload-view-and-scroll-through-short-form-vertical-video-content",
+      "title": "Build reels functionality that allows users to upload, view, and scroll through short-form vertical video content",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-video-feed-interface-that-displays-uploaded-videos-with-playback-controls-creator-information-and-engagement-options",
+      "title": "Create video feed interface that displays uploaded videos with playback controls, creator information, and engagement options",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-and-implement-a-cohesive-visual-identity-with-a-modern-photography-focused-aesthetic-featuring-warm-earth-tones-clean-typography-and-elegant-spacing-that-emphasizes-visual-content",
+      "title": "Design and implement a cohesive visual identity with a modern, photography-focused aesthetic featuring warm earth tones, clean typography, and elegant spacing that emphasizes visual content",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-profilesetupmodal-and-profileeditform-components-to-display-user-friendly-error-messages-when-content-validation-fails",
+      "title": "Update ProfileSetupModal and ProfileEditForm components to display user-friendly error messages when content validation fails",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-reeluploadform-component-to-display-user-friendly-error-messages-when-description-content-validation-fails",
+      "title": "Update ReelUploadForm component to display user-friendly error messages when description content validation fails",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "User registration and account management",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Reels functionality for short-form video content",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Video upload and playback system",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Implement video upload system that handles video file storage and retrieval with support for multiple video formats",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Implement content moderation to ensure polite language is used across the platform",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add content validation to profile bio field that checks for inappropriate language before allowing profile creation or updates",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add content validation to reel description field that checks for inappropriate language before allowing reel uploads",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Social Reel",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
