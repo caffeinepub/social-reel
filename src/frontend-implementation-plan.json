@@ -1,52 +1,151 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Implement content moderation for polite language across platform",
+  "title": "Add member discovery and follower system",
   "requirements": [
     {
-      "id": "REQ-9",
-      "summary": "Update ProfileSetupModal and ProfileEditForm to display validation error messages when bio contains inappropriate language",
+      "id": "REQ-1",
+      "summary": "Create a Members page that displays a browsable list of all registered users with their profile pictures, usernames, and follower counts",
       "acceptanceCriteria": [
-        "Validation errors are displayed clearly to users",
-        "Error messages guide users to correct their content",
-        "Form submission is prevented when validation fails"
+        "Members page shows all users in a grid or list layout",
+        "Each member card displays profile picture, username, and follower count",
+        "Clicking a member navigates to their profile page",
+        "Page includes loading and empty states"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/ProfileSetupModal.tsx",
-          "operation": "modify",
-          "description": "Add error state handling to display validation errors from the backend when inappropriate language is detected in the bio field. Show user-friendly error messages that guide users to correct their content. Prevent form submission when validation fails by handling backend error responses from saveCallerUserProfile mutation."
-        },
-        {
-          "path": "frontend/src/components/ProfileEditForm.tsx",
-          "operation": "modify",
-          "description": "Add error state handling to display validation errors from the backend when inappropriate language is detected in the bio field. Show user-friendly error messages that guide users to correct their content. Prevent form submission when validation fails by handling backend error responses from saveCallerUserProfile mutation."
+          "path": "frontend/src/pages/MembersPage.tsx",
+          "operation": "create",
+          "description": "Create a Members page component that fetches and displays all registered users in a grid layout. Each member card shows profile picture (using default avatar if none), username, and follower count. Cards are clickable and navigate to the user's profile page. Include loading skeleton and empty state for when no members exist."
         },
         {
           "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Update the useSaveCallerUserProfile mutation hook to properly handle and expose backend validation errors. Ensure error messages from backend traps are accessible to components for display to users."
+          "description": "Add useGetAllMembers hook that fetches all user profiles by calling backend methods to list all users and their profiles. Include follower counts in the returned data structure."
+        },
+        {
+          "path": "frontend/src/components/MemberCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable MemberCard component that displays a user's profile picture, username, and follower count in a card format. The card should be clickable and use Link component to navigate to the user's profile page."
         }
       ]
     },
     {
-      "id": "REQ-10",
-      "summary": "Update ReelUploadForm to display validation error messages when description contains inappropriate language",
+      "id": "REQ-3",
+      "summary": "Add Follow/Unfollow button to user profile pages that toggles based on current follow status and updates the follower count in real-time",
       "acceptanceCriteria": [
-        "Validation errors are displayed clearly to users",
-        "Error messages guide users to correct their description",
-        "Upload submission is prevented when validation fails"
+        "Profile pages show Follow button for users not followed",
+        "Profile pages show Unfollow button for users already followed",
+        "Users cannot follow themselves",
+        "Follower count updates immediately after follow/unfollow action",
+        "Button shows loading state during the operation"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/ReelUploadForm.tsx",
-          "operation": "modify",
-          "description": "Add error state handling to display validation errors from the backend when inappropriate language is detected in the description field. Show user-friendly error messages that guide users to correct their description. Prevent upload submission when validation fails by handling backend error responses from uploadReel mutation."
+          "path": "frontend/src/components/FollowButton.tsx",
+          "operation": "create",
+          "description": "Create a FollowButton component that displays Follow or Unfollow based on the current follow relationship. The component accepts the target user's Principal, checks if the current user follows them, and calls followUser or unfollowUser backend methods. Show loading state during the operation and disable the button when processing. Hide the button entirely if viewing own profile."
         },
         {
           "path": "frontend/src/hooks/useQueries.ts",
           "operation": "modify",
-          "description": "Update the useUploadReel mutation hook to properly handle and expose backend validation errors. Ensure error messages from backend traps are accessible to components for display to users."
+          "description": "Add useFollowUser and useUnfollowUser mutation hooks that call the backend followUser and unfollowUser methods. After successful mutation, invalidate queries for follower counts, followers list, following list, and user profiles to trigger UI updates. Add useIsFollowing query hook that checks if the current user follows a given Principal."
+        },
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "modify",
+          "description": "Import and integrate the FollowButton component into the profile header section, positioned near the username and bio. Pass the profile owner's Principal to the button. Ensure the button only appears when viewing another user's profile (not own profile)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Display follower and following counts on user profile pages with links to view the full lists",
+      "acceptanceCriteria": [
+        "Profile pages show follower count and following count",
+        "Counts are clickable and navigate to detailed list views",
+        "Counts update in real-time when relationships change"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "modify",
+          "description": "Add follower and following count display in the profile header section using useGetFollowerCount and useGetFollowingCount hooks. Format counts with labels (e.g., '42 Followers', '15 Following'). Make counts clickable using Link components that navigate to /profile/:principal/followers and /profile/:principal/following routes respectively."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add useGetFollowerCount and useGetFollowingCount query hooks that call getFollowerCount and getFollowingCount backend methods for a given Principal. These hooks should refetch when follow/unfollow mutations succeed."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Create Followers and Following list pages that display user cards with profile pictures, usernames, and follow status for each listed user",
+      "acceptanceCriteria": [
+        "Followers page shows all users who follow the profile owner",
+        "Following page shows all users the profile owner follows",
+        "Each user card includes Follow/Unfollow button when viewing as authenticated user",
+        "Lists handle empty states appropriately"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/FollowersPage.tsx",
+          "operation": "create",
+          "description": "Create a FollowersPage component that accepts a Principal parameter from the route and displays all users who follow that Principal. Use useGetFollowers hook to fetch the list. For each follower, display a MemberCard with their profile picture, username, and a FollowButton. Include loading skeleton and empty state with appropriate message."
+        },
+        {
+          "path": "frontend/src/pages/FollowingPage.tsx",
+          "operation": "create",
+          "description": "Create a FollowingPage component that accepts a Principal parameter from the route and displays all users that Principal follows. Use useGetFollowing hook to fetch the list. For each followed user, display a MemberCard with their profile picture, username, and a FollowButton. Include loading skeleton and empty state with appropriate message."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add useGetFollowers and useGetFollowing query hooks that call getFollowers and getFollowing backend methods for a given Principal. These should return arrays of Principals and be invalidated when follow/unfollow mutations occur."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Filter the reels feed to prioritize content from followed users while still showing other reels",
+      "acceptanceCriteria": [
+        "Reels feed shows content from followed users first",
+        "Non-followed users' reels appear after followed content",
+        "Feed maintains smooth scrolling experience",
+        "Algorithm is efficient and does not degrade performance"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ReelsFeedPage.tsx",
+          "operation": "modify",
+          "description": "Update ReelsFeedPage to use the getFeed backend method instead of getAllReels. The backend already returns reels prioritized by followed users. Update the useGetReels hook call to use the new backend capability. Maintain existing snap-scrolling behavior and active reel tracking."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add useGetFeed query hook that calls the getFeed backend method. This replaces or supplements useGetAllReels. The backend returns reels sorted with followed users' content first. Cache the feed data appropriately and invalidate when new reels are uploaded or follow relationships change."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add navigation link to Members page in the header alongside Feed and Reels links",
+      "acceptanceCriteria": [
+        "Members link appears in header navigation",
+        "Link is styled consistently with existing navigation items",
+        "Active state indicates when on Members page"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "modify",
+          "description": "Add a Members navigation link in the header between the existing Feed and Reels links. Use Link component with to='/members' path. Style consistently with existing navigation items and ensure active state styling works when on the Members page."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the /members route in the router configuration, mapping it to the MembersPage component. Also register /profile/:principal/followers and /profile/:principal/following routes for the followers and following list pages. Ensure all routes require authentication and are protected by the existing auth flow."
         }
       ]
     }

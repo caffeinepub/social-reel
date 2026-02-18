@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { Home, Film, User, Upload, LogOut } from 'lucide-react';
+import { Home, Film, Users, User, Upload, LogOut } from 'lucide-react';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from './ui/button';
@@ -56,6 +56,13 @@ export default function Layout({ children }: LayoutProps) {
               >
                 <Film className="h-4 w-4" />
                 Reels
+              </Link>
+              <Link
+                to="/members"
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Users className="h-4 w-4" />
+                Members
               </Link>
             </nav>
           </div>

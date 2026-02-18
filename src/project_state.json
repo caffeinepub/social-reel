@@ -1,69 +1,56 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
-  "summary": "Social media app similar to Instagram with user registration, reels, and video content",
-  "architectural_notes": [
-    "Social media platform requiring user authentication",
-    "Video content delivery system needed",
-    "Short-form video (reels) and standard video support required",
-    "Content moderation system needed to enforce polite language usage"
-  ],
+  "projectStateVersion": 3,
+  "summary": "A social media app with member reels, followers, and features inspired by Facebook and Telegram",
+  "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-implement-user-registration-and-authentication-system-using-internet-identity-that-allows-users-to-create-and-manage-their-accounts",
-      "title": "Implement user registration and authentication system using Internet Identity that allows users to create and manage their accounts",
+      "id": "feature-create-a-members-page-that-displays-a-browsable-list-of-all-registered-users-with-their-profile-pictures-usernames-and-follower-counts",
+      "title": "Create a Members page that displays a browsable list of all registered users with their profile pictures, usernames, and follower counts",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-user-profile-system-with-username-bio-and-profile-picture-support",
-      "title": "Create user profile system with username, bio, and profile picture support",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-build-reels-functionality-that-allows-users-to-upload-view-and-scroll-through-short-form-vertical-video-content",
-      "title": "Build reels functionality that allows users to upload, view, and scroll through short-form vertical video content",
+      "id": "feature-add-follow-unfollow-button-to-user-profile-pages-that-toggles-based-on-current-follow-status-and-updates-the-follower-count-in-real-time",
+      "title": "Add Follow/Unfollow button to user profile pages that toggles based on current follow status and updates the follower count in real-time",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-create-video-feed-interface-that-displays-uploaded-videos-with-playback-controls-creator-information-and-engagement-options",
-      "title": "Create video feed interface that displays uploaded videos with playback controls, creator information, and engagement options",
+      "id": "feature-display-follower-and-following-counts-on-user-profile-pages-with-links-to-view-the-full-lists",
+      "title": "Display follower and following counts on user profile pages with links to view the full lists",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-followers-and-following-list-pages-that-display-user-cards-with-profile-pictures-usernames-and-follow-status-for-each-listed-user",
+      "title": "Create Followers and Following list pages that display user cards with profile pictures, usernames, and follow status for each listed user",
       "reqIds": [
         "REQ-5"
       ],
       "version": 1
     },
     {
-      "id": "feature-design-and-implement-a-cohesive-visual-identity-with-a-modern-photography-focused-aesthetic-featuring-warm-earth-tones-clean-typography-and-elegant-spacing-that-emphasizes-visual-content",
-      "title": "Design and implement a cohesive visual identity with a modern, photography-focused aesthetic featuring warm earth tones, clean typography, and elegant spacing that emphasizes visual content",
+      "id": "feature-filter-the-reels-feed-to-prioritize-content-from-followed-users-while-still-showing-other-reels",
+      "title": "Filter the reels feed to prioritize content from followed users while still showing other reels",
       "reqIds": [
         "REQ-6"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-profilesetupmodal-and-profileeditform-components-to-display-user-friendly-error-messages-when-content-validation-fails",
-      "title": "Update ProfileSetupModal and ProfileEditForm components to display user-friendly error messages when content validation fails",
+      "id": "feature-add-navigation-link-to-members-page-in-the-header-alongside-feed-and-reels-links",
+      "title": "Add navigation link to Members page in the header alongside Feed and Reels links",
       "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-reeluploadform-component-to-display-user-friendly-error-messages-when-description-content-validation-fails",
-      "title": "Update ReelUploadForm component to display user-friendly error messages when description content validation fails",
-      "reqIds": [
-        "REQ-10"
+        "REQ-7"
       ],
       "version": 1
     }
@@ -71,49 +58,33 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "User registration and account management",
+      "summary": "Social reel feature to browse members",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Reels functionality for short-form video content",
+      "summary": "Member profiles with follower system",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Video upload and playback system",
+      "summary": "Facebook-inspired social features",
       "reqIds": [],
       "status": "pending"
     },
     {
-      "id": "AR-7",
-      "summary": "Implement video upload system that handles video file storage and retrieval with support for multiple video formats",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-8",
-      "summary": "Implement content moderation to ensure polite language is used across the platform",
+      "id": "AR-4",
+      "summary": "Telegram-inspired messaging/social features",
       "reqIds": [],
       "status": "pending"
     },
     {
-      "id": "AR-9",
-      "summary": "Add content validation to profile bio field that checks for inappropriate language before allowing profile creation or updates",
+      "id": "AR-6",
+      "summary": "Add follower/following system to the backend with functions to follow a user, unfollow a user, get a user's followers list, get a user's following list, and get follower/following counts",
       "reqIds": [
-        "REQ-7"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-10",
-      "summary": "Add content validation to reel description field that checks for inappropriate language before allowing reel uploads",
-      "reqIds": [
-        "REQ-8"
+        "REQ-2"
       ],
       "status": "pending"
     }

@@ -66,9 +66,23 @@ export const idlService = IDL.Service({
   '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'followUser' : IDL.Func([IDL.Principal], [], []),
   'getAllReels' : IDL.Func([], [IDL.Vec(Reel)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getFeed' : IDL.Func([], [IDL.Vec(Reel)], ['query']),
+  'getFollowerCount' : IDL.Func([IDL.Principal], [IDL.Nat], ['query']),
+  'getFollowers' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Vec(IDL.Principal)],
+      ['query'],
+    ),
+  'getFollowing' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Vec(IDL.Principal)],
+      ['query'],
+    ),
+  'getFollowingCount' : IDL.Func([IDL.Principal], [IDL.Nat], ['query']),
   'getReel' : IDL.Func([IDL.Nat], [Reel], ['query']),
   'getReelsByUploader' : IDL.Func([IDL.Principal], [IDL.Vec(Reel)], ['query']),
   'getUserProfile' : IDL.Func(
@@ -78,6 +92,7 @@ export const idlService = IDL.Service({
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'unfollowUser' : IDL.Func([IDL.Principal], [], []),
   'uploadReel' : IDL.Func([ExternalBlob, IDL.Text], [IDL.Nat], []),
 });
 
@@ -142,9 +157,23 @@ export const idlFactory = ({ IDL }) => {
     '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'followUser' : IDL.Func([IDL.Principal], [], []),
     'getAllReels' : IDL.Func([], [IDL.Vec(Reel)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getFeed' : IDL.Func([], [IDL.Vec(Reel)], ['query']),
+    'getFollowerCount' : IDL.Func([IDL.Principal], [IDL.Nat], ['query']),
+    'getFollowers' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Vec(IDL.Principal)],
+        ['query'],
+      ),
+    'getFollowing' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Vec(IDL.Principal)],
+        ['query'],
+      ),
+    'getFollowingCount' : IDL.Func([IDL.Principal], [IDL.Nat], ['query']),
     'getReel' : IDL.Func([IDL.Nat], [Reel], ['query']),
     'getReelsByUploader' : IDL.Func(
         [IDL.Principal],
@@ -158,6 +187,7 @@ export const idlFactory = ({ IDL }) => {
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'unfollowUser' : IDL.Func([IDL.Principal], [], []),
     'uploadReel' : IDL.Func([ExternalBlob, IDL.Text], [IDL.Nat], []),
   });
 };

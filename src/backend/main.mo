@@ -1,4 +1,5 @@
 import Map "mo:core/Map";
+import List "mo:core/List";
 import Iter "mo:core/Iter";
 import Principal "mo:core/Principal";
 import Order "mo:core/Order";
@@ -19,260 +20,14 @@ actor {
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
 
-  // Profanity filter
-  let profanityList = [
-    "fuck",
-    "shit",
-    "bitch",
-    "asshole",
-    "cunt",
-    "dick",
-    "bastard",
-    "damn",
-    "crap",
-    "piss",
-    "cock",
-    "fag",
-    "slut",
-    "prick",
-    "twat",
-    "wanker",
-    "bugger",
-    "bollocks",
-    "arse",
-    "bloody",
-    "shag",
-    "tosser",
-    "pillock",
-    "bollocks",
-    "bollox",
-    "wank",
-    "knob",
-    "willy",
-    "git",
-    "minger",
-    "bellend",
-    "numpty",
-    "bugger",
-    "plonker",
-    "banter",
-    "blighter",
-    "git",
-    "numpty",
-    "quim",
-    "berk",
-    "smeghead",
-    "ponce",
-    "pratt",
-    "div",
-    "git",
-    "muppet",
-    "spaz",
-    "pillock",
-    "muppetry",
-    "munter",
-    "naff",
-    "plonker",
-    "scrubber",
-    "tosspot",
-    "whinge",
-    "tosspot",
-    "wally",
-    "wazzock",
-    "bellend",
-    "berk",
-    "blighter",
-    "bloody",
-    "bollocks",
-    "bonk",
-    "bugger",
-    "chav",
-    "cock",
-    "crikey",
-    "dosh",
-    "fag",
-    "fit",
-    "gobsmacked",
-    "grotty",
-    "knackered",
-    "lad",
-    "lush",
-    "manky",
-    "mental",
-    "minted",
-    "nitwit",
-    "nonce",
-    "pants",
-    "peckish",
-    "piss",
-    "posh",
-    "poxy",
-    "prat",
-    "quid",
-    "shag",
-    "skint",
-    "snog",
-    "sod",
-    "spanner",
-    "spaz",
-    "suss",
-    "tat",
-    "tosser",
-    "twat",
-    "wanker",
-    "wazzock",
-    "wee",
-    "whinge",
-    "wonky",
-    "yonks",
-    "arsehole",
-    "bollocks",
-    "bugger",
-    "bint",
-    "bloody",
-    "bollocks",
-    "cock",
-    "crikey",
-    "dosh",
-    "fag",
-    "fit",
-    "gobsmacked",
-    "grotty",
-    "knackered",
-    "lad",
-    "lush",
-    "manky",
-    "mental",
-    "minted",
-    "nitwit",
-    "nonce",
-    "pants",
-    "peckish",
-    "piss",
-    "posh",
-    "poxy",
-    "prat",
-    "quid",
-    "shag",
-    "skint",
-    "snog",
-    "sod",
-    "spanner",
-    "spaz",
-    "suss",
-    "tat",
-    "tosser",
-    "twat",
-    "wanker",
-    "wazzock",
-    "wee",
-    "whinge",
-    "wonky",
-    "yonks",
-    "bint",
-    "bloody",
-    "bollocks",
-    "bonk",
-    "bugger",
-    "chav",
-    "cock",
-    "crikey",
-    "dosh",
-    "fag",
-    "fit",
-    "gobsmacked",
-    "grotty",
-    "knackered",
-    "lad",
-    "lush",
-    "manky",
-    "mental",
-    "minted",
-    "nitwit",
-    "nonce",
-    "pants",
-    "peckish",
-    "piss",
-    "posh",
-    "poxy",
-    "prat",
-    "quid",
-    "shag",
-    "skint",
-    "snog",
-    "sod",
-    "spanner",
-    "spaz",
-    "suss",
-    "tat",
-    "tosser",
-    "twat",
-    "wanker",
-    "wazzock",
-    "wee",
-    "whinge",
-    "wonky",
-    "yonks",
-    "arsehole",
-    "bollocks",
-    "bugger",
-    "cobblers",
-    "crikey",
-    "dosh",
-    "fag",
-    "fit",
-    "gobsmacked",
-    "grotty",
-    "knackered",
-    "lad",
-    "lush",
-    "manky",
-    "mental",
-    "minted",
-    "nitwit",
-    "nonce",
-    "pants",
-    "peckish",
-    "piss",
-    "posh",
-    "poxy",
-    "prat",
-    "quid",
-    "shag",
-    "skint",
-    "snog",
-    "sod",
-    "spanner",
-    "spaz",
-    "suss",
-    "tat",
-    "tosser",
-    "twat",
-    "wanker",
-    "wazzock",
-    "wee",
-    "whinge",
-    "wonky",
-    "yonks",
-    "bollocks",
-    "chuffed",
-    "knob",
-    "nob",
-  ];
-
   type ProfanityMap = [Text];
-
   var profanityMap : ProfanityMap = [];
 
-  // Function to build the profanity map on initialization
+  // Profanity filter
   func buildProfanityMap(words : [Text]) {
     profanityMap := words;
   };
 
-  // Initialize the profanity map on actor initialization
-  buildProfanityMap(profanityList);
-
-  // Function to check if a word is profane using the profanity map
   func isProfane(text : Text) : Bool {
     for (word in profanityMap.values()) {
       if (text.contains(#text(word))) {
@@ -299,16 +54,19 @@ actor {
     description : Text;
   };
 
+  type Followers = List.List<Principal>;
+  type Following = List.List<Principal>;
   module Reel {
     public func compare(reel1 : Reel, reel2 : Reel) : Order.Order {
       Int.compare(reel2.id, reel1.id);
     };
   };
 
-  let reels = Map.empty<Nat, Reel>();
+  var reels = Map.empty<Nat, Reel>();
   var nextReelId = 0;
+  var followersMap = Map.empty<Principal, Followers>();
+  var followingMap = Map.empty<Principal, Following>();
 
-  // Save or update user profile
   public shared ({ caller }) func saveCallerUserProfile(profile : UserProfile) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can save profiles");
@@ -319,7 +77,6 @@ actor {
     userProfiles.add(caller, profile);
   };
 
-  // Get caller's user profile
   public query ({ caller }) func getCallerUserProfile() : async ?UserProfile {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can view profiles");
@@ -327,7 +84,6 @@ actor {
     userProfiles.get(caller);
   };
 
-  // Get user profile by principal
   public query ({ caller }) func getUserProfile(user : Principal) : async ?UserProfile {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can view profiles");
@@ -335,7 +91,6 @@ actor {
     userProfiles.get(user);
   };
 
-  // Upload a new reel
   public shared ({ caller }) func uploadReel(video : Storage.ExternalBlob, description : Text) : async Nat {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can upload reels");
@@ -355,7 +110,6 @@ actor {
     reelId;
   };
 
-  // Get a specific reel by ID
   public query ({ caller }) func getReel(id : Nat) : async Reel {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can view reels");
@@ -366,7 +120,6 @@ actor {
     };
   };
 
-  // Get all reels sorted by ID (newest first)
   public query ({ caller }) func getAllReels() : async [Reel] {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can view reels");
@@ -374,20 +127,396 @@ actor {
     reels.values().toArray().sort();
   };
 
-  // Get reels uploaded by a specific user
   public query ({ caller }) func getReelsByUploader(uploader : Principal) : async [Reel] {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can view reels");
     };
-    // Filter and collect matching reels
     let filteredReels = reels.values().filter(
       func(reel) {
         reel.uploader == uploader;
       }
     );
-
-    // Convert to array and sort by ID (newest first)
     filteredReels.toArray().sort();
   };
-};
 
+  public shared ({ caller }) func followUser(userToFollow : Principal) : async () {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can follow others");
+    };
+    if (caller == userToFollow) {
+      Runtime.trap("You cannot follow yourself");
+    };
+
+    let currentFollowers = switch (followersMap.get(userToFollow)) {
+      case (null) { List.empty<Principal>() };
+      case (?followers) { followers };
+    };
+
+    let currentFollowing = switch (followingMap.get(caller)) {
+      case (null) { List.empty<Principal>() };
+      case (?following) { following };
+    };
+
+    if (currentFollowers.contains(caller)) {
+      Runtime.trap("You are already following this user");
+    };
+
+    currentFollowers.add(caller);
+    currentFollowing.add(userToFollow);
+
+    followersMap.add(userToFollow, currentFollowers);
+    followingMap.add(caller, currentFollowing);
+  };
+
+  public shared ({ caller }) func unfollowUser(userToUnfollow : Principal) : async () {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can unfollow others");
+    };
+    let currentFollowers = switch (followersMap.get(userToUnfollow)) {
+      case (null) { List.empty<Principal>() };
+      case (?followers) { followers };
+    };
+
+    let currentFollowing = switch (followingMap.get(caller)) {
+      case (null) { List.empty<Principal>() };
+      case (?following) { following };
+    };
+
+    if (not currentFollowers.contains(caller)) {
+      Runtime.trap("You are not following this user");
+    };
+
+    let filteredFollowers = List.empty<Principal>();
+    for (follower in currentFollowers.values()) {
+      if (follower != caller) {
+        filteredFollowers.add(follower);
+      };
+    };
+
+    let filteredFollowing = List.empty<Principal>();
+    for (following in currentFollowing.values()) {
+      if (following != userToUnfollow) {
+        filteredFollowing.add(following);
+      };
+    };
+
+    followersMap.add(userToUnfollow, filteredFollowers);
+    followingMap.add(caller, filteredFollowing);
+  };
+
+  public query ({ caller }) func getFollowers(user : Principal) : async [Principal] {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view followers");
+    };
+    switch (followersMap.get(user)) {
+      case (null) { [] };
+      case (?followers) { followers.toArray() };
+    };
+  };
+
+  public query ({ caller }) func getFollowing(user : Principal) : async [Principal] {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view following list");
+    };
+    switch (followingMap.get(user)) {
+      case (null) { [] };
+      case (?following) { following.toArray() };
+    };
+  };
+
+  public query ({ caller }) func getFollowerCount(user : Principal) : async Nat {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view follower count");
+    };
+    switch (followersMap.get(user)) {
+      case (null) { 0 };
+      case (?followers) { followers.size() };
+    };
+  };
+
+  public query ({ caller }) func getFollowingCount(user : Principal) : async Nat {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view following count");
+    };
+    switch (followingMap.get(user)) {
+      case (null) { 0 };
+      case (?following) { following.size() };
+    };
+  };
+
+  public query ({ caller }) func getFeed() : async [Reel] {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view feed");
+    };
+
+    let following = switch (followingMap.get(caller)) {
+      case (null) { List.empty<Principal>() };
+      case (?following) { following };
+    };
+
+    let followedReels = List.empty<Reel>();
+    let nonFollowedReels = List.empty<Reel>();
+
+    for (reel in reels.values()) {
+      if (following.contains(reel.uploader)) {
+        followedReels.add(reel);
+      } else {
+        nonFollowedReels.add(reel);
+      };
+    };
+
+    let followedArray = followedReels.toArray().sort();
+    let nonFollowedArray = nonFollowedReels.toArray().sort();
+
+    followedArray.concat(
+      nonFollowedArray
+    );
+  };
+
+  // Actor initialization
+  system func preupgrade() {
+    // No action needed, data is already persistent.
+  };
+
+  system func postupgrade() {
+    buildProfanityMap([
+      "fuck",
+      "shit",
+      "bitch",
+      "asshole",
+      "cunt",
+      "dick",
+      "bastard",
+      "damn",
+      "crap",
+      "piss",
+      "cock",
+      "fag",
+      "slut",
+      "prick",
+      "twat",
+      "wanker",
+      "bugger",
+      "bollocks",
+      "arse",
+      "bloody",
+      "shag",
+      "tosser",
+      "pillock",
+      "bollocks",
+      "bollox",
+      "wank",
+      "knob",
+      "willy",
+      "git",
+      "minger",
+      "bellend",
+      "numpty",
+      "bugger",
+      "plonker",
+      "banter",
+      "blighter",
+      "git",
+      "numpty",
+      "quim",
+      "berk",
+      "smeghead",
+      "ponce",
+      "pratt",
+      "div",
+      "git",
+      "muppet",
+      "spaz",
+      "pillock",
+      "muppetry",
+      "munter",
+      "naff",
+      "plonker",
+      "scrubber",
+      "tosspot",
+      "whinge",
+      "tosspot",
+      "wally",
+      "wazzock",
+      "bellend",
+      "berk",
+      "blighter",
+      "bloody",
+      "bollocks",
+      "bonk",
+      "bugger",
+      "chav",
+      "cock",
+      "crikey",
+      "dosh",
+      "fag",
+      "fit",
+      "gobsmacked",
+      "grotty",
+      "knackered",
+      "lad",
+      "lush",
+      "manky",
+      "mental",
+      "minted",
+      "nitwit",
+      "nonce",
+      "pants",
+      "peckish",
+      "piss",
+      "posh",
+      "poxy",
+      "prat",
+      "quid",
+      "shag",
+      "skint",
+      "snog",
+      "sod",
+      "spanner",
+      "spaz",
+      "suss",
+      "tat",
+      "tosser",
+      "twat",
+      "wanker",
+      "wazzock",
+      "wee",
+      "whinge",
+      "wonky",
+      "yonks",
+      "arsehole",
+      "bollocks",
+      "bugger",
+      "bint",
+      "bloody",
+      "bollocks",
+      "cock",
+      "crikey",
+      "dosh",
+      "fag",
+      "fit",
+      "gobsmacked",
+      "grotty",
+      "knackered",
+      "lad",
+      "lush",
+      "manky",
+      "mental",
+      "minted",
+      "nitwit",
+      "nonce",
+      "pants",
+      "peckish",
+      "piss",
+      "posh",
+      "poxy",
+      "prat",
+      "quid",
+      "shag",
+      "skint",
+      "snog",
+      "sod",
+      "spanner",
+      "spaz",
+      "suss",
+      "tat",
+      "tosser",
+      "twat",
+      "wanker",
+      "wazzock",
+      "wee",
+      "whinge",
+      "wonky",
+      "yonks",
+      "bint",
+      "bloody",
+      "bollocks",
+      "bonk",
+      "bugger",
+      "chav",
+      "cock",
+      "crikey",
+      "dosh",
+      "fag",
+      "fit",
+      "gobsmacked",
+      "grotty",
+      "knackered",
+      "lad",
+      "lush",
+      "manky",
+      "mental",
+      "minted",
+      "nitwit",
+      "nonce",
+      "pants",
+      "peckish",
+      "piss",
+      "posh",
+      "poxy",
+      "prat",
+      "quid",
+      "shag",
+      "skint",
+      "snog",
+      "sod",
+      "spanner",
+      "spaz",
+      "suss",
+      "tat",
+      "tosser",
+      "twat",
+      "wanker",
+      "wazzock",
+      "wee",
+      "whinge",
+      "wonky",
+      "yonks",
+      "arsehole",
+      "bollocks",
+      "bugger",
+      "cobblers",
+      "crikey",
+      "dosh",
+      "fag",
+      "fit",
+      "gobsmacked",
+      "grotty",
+      "knackered",
+      "lad",
+      "lush",
+      "manky",
+      "mental",
+      "minted",
+      "nitwit",
+      "nonce",
+      "pants",
+      "peckish",
+      "piss",
+      "posh",
+      "poxy",
+      "prat",
+      "quid",
+      "shag",
+      "skint",
+      "snog",
+      "sod",
+      "spanner",
+      "spaz",
+      "suss",
+      "tat",
+      "tosser",
+      "twat",
+      "wanker",
+      "wazzock",
+      "wee",
+      "whinge",
+      "wonky",
+      "yonks",
+      "bollocks",
+      "chuffed",
+      "knob",
+      "nob",
+    ]);
+  };
+};

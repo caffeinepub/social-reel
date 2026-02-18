@@ -1,17 +1,22 @@
 {
-  "frontend/src/App.tsx": "Main application component with TanStack Router setup, authentication checks, and profile setup modal integration for the Instagram-like social media app.",
-  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations with enhanced error handling that extracts and exposes validation error messages from backend traps for display in UI components.",
-  "frontend/src/components/Layout.tsx": "Main layout wrapper with header navigation, logo, upload dialog, profile/logout buttons, and footer with attribution.",
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup including new routes for members, followers, and following pages, with authentication checks and profile setup modal integration.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including new hooks for follow/unfollow functionality, follower/following lists and counts, and personalized feed with enhanced error handling.",
+  "frontend/src/components/Layout.tsx": "Main layout wrapper with header navigation including new Members link, logo, upload dialog, profile/logout buttons, and footer with attribution.",
   "frontend/src/components/ProfileSetupModal.tsx": "Modal dialog for first-time user profile setup with validation error display, showing clear error messages when inappropriate language is detected in bio field and preventing submission until corrected.",
   "frontend/src/components/ReelUploadForm.tsx": "Form component for uploading video reels with validation error display, showing clear error messages when inappropriate language is detected in description field and preventing submission until corrected.",
   "frontend/src/components/VideoCard.tsx": "Card component displaying video content with play/pause controls, volume toggle, and creator information for the grid feed.",
   "frontend/src/components/ReelCard.tsx": "Full-screen vertical video card for the reels feed with autoplay, mute toggle, and creator overlay information.",
   "frontend/src/pages/LoginPage.tsx": "Landing page with Internet Identity login button and welcome message for unauthenticated users.",
   "frontend/src/pages/VideoFeedPage.tsx": "Main feed page displaying all reels in a responsive grid layout with empty state handling.",
-  "frontend/src/pages/ReelsFeedPage.tsx": "Vertical scrolling reels feed with snap scrolling and autoplay for active videos, Instagram-style.",
-  "frontend/src/pages/ProfilePage.tsx": "User profile page showing avatar, bio, stats, and user's uploaded reels with edit functionality for own profile.",
+  "frontend/src/pages/ReelsFeedPage.tsx": "Vertical scrolling reels feed with snap scrolling and autoplay using personalized feed that prioritizes content from followed users.",
+  "frontend/src/pages/ProfilePage.tsx": "User profile page showing avatar, bio, follower/following counts with clickable links, follow button for other users, edit functionality for own profile, and user's uploaded reels.",
   "frontend/src/components/ProfileEditForm.tsx": "Form component for editing user profile with validation error display, showing clear error messages when inappropriate language is detected in bio field and preventing submission until corrected.",
   "frontend/src/index.css": "Global styles with warm earth tone OKLCH color system for both light and dark modes, emphasizing photography-focused aesthetic.",
   "frontend/tailwind.config.js": "Tailwind configuration with custom warm earth tone colors, Inter font family, generous spacing, and soft shadows for modern design.",
-  "frontend/src/main.tsx": "Application entry point with QueryClient, InternetIdentityProvider, and Sonner toast notifications setup."
+  "frontend/src/main.tsx": "Application entry point with QueryClient, InternetIdentityProvider, and Sonner toast notifications setup.",
+  "frontend/src/components/MemberCard.tsx": "Reusable card component displaying user profile picture, username, and follower count with clickable link to user profile.",
+  "frontend/src/components/FollowButton.tsx": "Interactive button component that toggles between Follow and Unfollow states based on current relationship, with loading states and toast notifications.",
+  "frontend/src/pages/MembersPage.tsx": "Page displaying all registered users in a grid layout with profile pictures, usernames, and follower counts, including loading skeletons and empty states.",
+  "frontend/src/pages/FollowersPage.tsx": "Page displaying all followers of a specific user with member cards, back navigation, and appropriate empty states.",
+  "frontend/src/pages/FollowingPage.tsx": "Page displaying all users that a specific user follows with member cards, back navigation, and appropriate empty states."
 }

@@ -6,6 +6,9 @@ import ProfileSetupModal from './components/ProfileSetupModal';
 import VideoFeedPage from './pages/VideoFeedPage';
 import ReelsFeedPage from './pages/ReelsFeedPage';
 import ProfilePage from './pages/ProfilePage';
+import MembersPage from './pages/MembersPage';
+import FollowersPage from './pages/FollowersPage';
+import FollowingPage from './pages/FollowingPage';
 import LoginPage from './pages/LoginPage';
 
 function LayoutWrapper() {
@@ -32,13 +35,38 @@ const reelsRoute = createRoute({
   component: ReelsFeedPage,
 });
 
+const membersRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/members',
+  component: MembersPage,
+});
+
 const profileRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/profile/$principalId',
   component: ProfilePage,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, reelsRoute, profileRoute]);
+const followersRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/profile/$principalId/followers',
+  component: FollowersPage,
+});
+
+const followingRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/profile/$principalId/following',
+  component: FollowingPage,
+});
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  reelsRoute,
+  membersRoute,
+  profileRoute,
+  followersRoute,
+  followingRoute,
+]);
 
 const router = createRouter({ routeTree });
 

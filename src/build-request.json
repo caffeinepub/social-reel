@@ -1,91 +1,158 @@
 {
   "kind": "build_request",
-  "title": "Implement content moderation for polite language across platform",
+  "title": "Add member discovery and follower system",
+  "projectName": "Social Reel",
   "priority": "normal",
   "requirements": [
     {
+      "id": "REQ-1",
+      "text": "Create a Members page that displays a browsable list of all registered users with their profile pictures, usernames, and follower counts",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Enable social reel to see members"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Members page shows all users in a grid or list layout",
+        "Each member card displays profile picture, username, and follower count",
+        "Clicking a member navigates to their profile page",
+        "Page includes loading and empty states"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add follower/following system to the backend with functions to follow a user, unfollow a user, get a user's followers list, get a user's following list, and get follower/following counts",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "each member has its followers"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores follower relationships with proper data structures",
+        "Users can follow and unfollow other users",
+        "Backend provides queries for followers list, following list, and counts",
+        "Following relationships are properly persisted across upgrades"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add Follow/Unfollow button to user profile pages that toggles based on current follow status and updates the follower count in real-time",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "each member has its followers"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Profile pages show Follow button for users not followed",
+        "Profile pages show Unfollow button for users already followed",
+        "Users cannot follow themselves",
+        "Follower count updates immediately after follow/unfollow action",
+        "Button shows loading state during the operation"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Display follower and following counts on user profile pages with links to view the full lists",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "each member has its followers"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Profile pages show follower count and following count",
+        "Counts are clickable and navigate to detailed list views",
+        "Counts update in real-time when relationships change"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Create Followers and Following list pages that display user cards with profile pictures, usernames, and follow status for each listed user",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "each member has its followers",
+          "replicate Facebook and telegram"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Followers page shows all users who follow the profile owner",
+        "Following page shows all users the profile owner follows",
+        "Each user card includes Follow/Unfollow button when viewing as authenticated user",
+        "Lists handle empty states appropriately"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Filter the reels feed to prioritize content from followed users while still showing other reels",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "replicate Facebook and telegram"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Reels feed shows content from followed users first",
+        "Non-followed users' reels appear after followed content",
+        "Feed maintains smooth scrolling experience",
+        "Algorithm is efficient and does not degrade performance"
+      ]
+    },
+    {
       "id": "REQ-7",
-      "text": "Add content validation to profile bio field that checks for inappropriate language before allowing profile creation or updates",
-      "target": "backend",
-      "source": {
-        "messageIds": [
-          "msg-user-polite-language"
-        ],
-        "quotes": [
-          "Polite language to be used"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Profile bio submissions are validated for inappropriate language",
-        "Inappropriate content in bios is rejected with a clear error message",
-        "Valid bios pass through without modification"
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Add content validation to reel description field that checks for inappropriate language before allowing reel uploads",
-      "target": "backend",
-      "source": {
-        "messageIds": [
-          "msg-user-polite-language"
-        ],
-        "quotes": [
-          "Polite language to be used"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Reel descriptions are validated for inappropriate language",
-        "Inappropriate content in descriptions is rejected with a clear error message",
-        "Valid descriptions pass through without modification"
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "text": "Update ProfileSetupModal and ProfileEditForm components to display user-friendly error messages when content validation fails",
+      "text": "Add navigation link to Members page in the header alongside Feed and Reels links",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-polite-language"
+          "msg-last"
         ],
         "quotes": [
-          "Polite language to be used"
+          "Enable social reel to see members"
         ]
       },
       "acceptanceCriteria": [
-        "Validation errors are displayed clearly to users",
-        "Error messages guide users to correct their content",
-        "Form submission is prevented when validation fails"
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "text": "Update ReelUploadForm component to display user-friendly error messages when description content validation fails",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-user-polite-language"
-        ],
-        "quotes": [
-          "Polite language to be used"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Validation errors are displayed clearly to users",
-        "Error messages guide users to correct their description",
-        "Upload submission is prevented when validation fails"
+        "Members link appears in header navigation",
+        "Link is styled consistently with existing navigation items",
+        "Active state indicates when on Members page"
       ]
     }
   ],
   "constraints": [
-    "Content moderation must not modify or censor user content, only accept or reject it",
-    "Validation must occur on the backend to ensure security",
-    "Error messages must be respectful and constructive"
+    "Maintain existing authentication flow using Internet Identity",
+    "Preserve existing profanity filtering for user-generated content",
+    "Do not modify the single-actor backend architecture",
+    "Keep all follower data in the main backend actor",
+    "Do not change existing ReelCard, VideoCard, or video feed functionality"
   ],
   "nonGoals": [
-    "Implementing AI-based content moderation",
-    "Adding reporting or flagging functionality",
-    "Moderating video content itself",
-    "Creating an admin dashboard for content review"
+    "Direct messaging or chat functionality",
+    "Group features or communities",
+    "Stories or temporary content",
+    "Notifications system",
+    "Content recommendation algorithm beyond follower prioritization",
+    "Privacy settings for profiles or followers",
+    "Blocking or muting users"
   ],
   "imageRequirements": {
     "required": [],

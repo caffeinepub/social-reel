@@ -2,12 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-profilesetupmodal-and-profileeditform-components-to-display-user-friendly-error-messages-when-content-validation-fails",
-      "featureTitle": "Update ProfileSetupModal and ProfileEditForm components to display user-friendly error messages when content validation fails",
+      "featureId": "feature-create-a-members-page-that-displays-a-browsable-list-of-all-registered-users-with-their-profile-pictures-usernames-and-follower-counts",
+      "featureTitle": "Create a Members page that displays a browsable list of all registered users with their profile pictures, usernames, and follower counts",
       "files": [
-        "frontend/src/components/ProfileEditForm.tsx",
-        "frontend/src/components/ProfileSetupModal.tsx",
-        "frontend/src/hooks/useQueries.ts"
+        "frontend/src/components/MemberCard.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/MembersPage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -19,16 +19,17 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-9"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-reeluploadform-component-to-display-user-friendly-error-messages-when-description-content-validation-fails",
-      "featureTitle": "Update ReelUploadForm component to display user-friendly error messages when description content validation fails",
+      "featureId": "feature-add-follow-unfollow-button-to-user-profile-pages-that-toggles-based-on-current-follow-status-and-updates-the-follower-count-in-real-time",
+      "featureTitle": "Add Follow/Unfollow button to user profile pages that toggles based on current follow status and updates the follower count in real-time",
       "files": [
-        "frontend/src/components/ReelUploadForm.tsx",
-        "frontend/src/hooks/useQueries.ts"
+        "frontend/src/components/FollowButton.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/ProfilePage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -40,7 +41,92 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-10"
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-display-follower-and-following-counts-on-user-profile-pages-with-links-to-view-the-full-lists",
+      "featureTitle": "Display follower and following counts on user profile pages with links to view the full lists",
+      "files": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/ProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-followers-and-following-list-pages-that-display-user-cards-with-profile-pictures-usernames-and-follow-status-for-each-listed-user",
+      "featureTitle": "Create Followers and Following list pages that display user cards with profile pictures, usernames, and follow status for each listed user",
+      "files": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/FollowersPage.tsx",
+        "frontend/src/pages/FollowingPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-filter-the-reels-feed-to-prioritize-content-from-followed-users-while-still-showing-other-reels",
+      "featureTitle": "Filter the reels feed to prioritize content from followed users while still showing other reels",
+      "files": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/ReelsFeedPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-navigation-link-to-members-page-in-the-header-alongside-feed-and-reels-links",
+      "featureTitle": "Add navigation link to Members page in the header alongside Feed and Reels links",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Layout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
       ],
       "confidence": "high"
     }

@@ -1,55 +1,104 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-18T19:25:13.150Z",
+  "generatedAt": "2026-02-18T23:19:51.992Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 2,
+    "total": 7,
+    "implemented": 6,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Update ReelUploadForm component to display user-friendly error messages when description content validation fails",
+        "id": "REQ-1",
+        "summary": "Create a Members page that displays a browsable list of all registered users with their profile pictures, usernames, and follower counts",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/ReelUploadForm.tsx",
+          "frontend/src/pages/MembersPage.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/MemberCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/MembersPage.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/MemberCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Add follower/following system to the backend with functions to follow a user, unfollow a user, get a user's followers list, get a user's following list, and get follower/following counts",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Add Follow/Unfollow button to user profile pages that toggles based on current follow status and updates the follower count in real-time",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/FollowButton.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/pages/ProfilePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/FollowButton.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/pages/ProfilePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Display follower and following counts on user profile pages with links to view the full lists",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ProfilePage.tsx",
           "frontend/src/hooks/useQueries.ts"
         ],
         "matchedFiles": [
-          "frontend/src/components/ReelUploadForm.tsx",
+          "frontend/src/pages/ProfilePage.tsx",
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Create Followers and Following list pages that display user cards with profile pictures, usernames, and follow status for each listed user",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/FollowersPage.tsx",
+          "frontend/src/pages/FollowingPage.tsx",
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/FollowersPage.tsx",
+          "frontend/src/pages/FollowingPage.tsx",
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Filter the reels feed to prioritize content from followed users while still showing other reels",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ReelsFeedPage.tsx",
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ReelsFeedPage.tsx",
           "frontend/src/hooks/useQueries.ts"
         ]
       },
       {
         "id": "REQ-7",
-        "summary": "Add content validation to profile bio field that checks for inappropriate language before allowing profile creation or updates",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-8",
-        "summary": "Add content validation to reel description field that checks for inappropriate language before allowing reel uploads",
-        "status": "unknown",
-        "plannedFiles": [],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-9",
-        "summary": "Update ProfileSetupModal and ProfileEditForm components to display user-friendly error messages when content validation fails",
+        "summary": "Add navigation link to Members page in the header alongside Feed and Reels links",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/ProfileSetupModal.tsx",
-          "frontend/src/components/ProfileEditForm.tsx",
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/components/Layout.tsx",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/ProfileSetupModal.tsx",
-          "frontend/src/components/ProfileEditForm.tsx",
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/components/Layout.tsx",
+          "frontend/src/App.tsx"
         ]
       }
     ]
@@ -58,14 +107,24 @@
     "backend/main.mo",
     "backend/migration.mo",
     "build-request.json",
-    "build-template/README.md",
+    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/ProfileEditForm.tsx",
-    "frontend/src/components/ProfileSetupModal.tsx",
-    "frontend/src/components/ReelUploadForm.tsx",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/FollowButton.tsx",
+    "frontend/src/components/Layout.tsx",
+    "frontend/src/components/MemberCard.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
     "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/FollowersPage.tsx",
+    "frontend/src/pages/FollowingPage.tsx",
+    "frontend/src/pages/MembersPage.tsx",
+    "frontend/src/pages/ProfilePage.tsx",
+    "frontend/src/pages/ReelsFeedPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

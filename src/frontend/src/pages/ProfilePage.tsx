@@ -1,13 +1,21 @@
-import { useParams } from '@tanstack/react-router';
-import { useGetUserProfile, useGetReelsByUploader, useGetCallerUserProfile } from '../hooks/useQueries';
+import { useParams, Link } from '@tanstack/react-router';
+import {
+  useGetUserProfile,
+  useGetReelsByUploader,
+  useGetCallerUserProfile,
+  useGetFollowerCount,
+  useGetFollowingCount,
+} from '../hooks/useQueries';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar';
 import { Button } from '../components/ui/button';
 import { Loader2, User as UserIcon, Edit } from 'lucide-react';
 import VideoCard from '../components/VideoCard';
+import FollowButton from '../components/FollowButton';
 import { useState } from 'react';
 import ProfileEditForm from '../components/ProfileEditForm';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
+import { Principal } from '@dfinity/principal';
 
 export default function ProfilePage() {
   const { principalId } = useParams({ from: '/profile/$principalId' });
@@ -15,6 +23,8 @@ export default function ProfilePage() {
   const { data: profile, isLoading: profileLoading } = useGetUserProfile(principalId);
   const { data: reels, isLoading: reelsLoading } = useGetReelsByUploader(principalId);
   const { data: currentUserProfile } = useGetCallerUserProfile();
+  const { data: followerCount } = useGetFollowerCount(principalId);
+  const { data: followingCount } = useGetFollowingCount(principalId);
   const [editOpen, setEditOpen] = useState(false);
 
   const isOwnProfile = identity?.getPrincipal().toString() === principalId;
@@ -41,6 +51,7 @@ export default function ProfilePage() {
   }
 
   const profilePictureUrl = profile.profilePicture?.getDirectURL();
+  const targetPrincipal = Principal.fromText(principalId);
 
   return (
     <div className="container py-8 px-4 max-w-5xl">
@@ -58,7 +69,7 @@ export default function ProfilePage() {
           <div className="flex-1 space-y-3">
             <div className="flex items-center gap-4">
               <h1 className="text-3xl font-bold">{profile.username}</h1>
-              {isOwnProfile && (
+              {isOwnProfile ? (
                 <Dialog open={editOpen} onOpenChange={setEditOpen}>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm" className="gap-2">
@@ -73,6 +84,8 @@ export default function ProfilePage() {
                     <ProfileEditForm currentProfile={currentUserProfile!} onSuccess={handleEditSuccess} />
                   </DialogContent>
                 </Dialog>
+              ) : (
+                <FollowButton targetPrincipal={targetPrincipal} />
               )}
             </div>
             {profile.bio && <p className="text-muted-foreground">{profile.bio}</p>}
@@ -81,6 +94,24 @@ export default function ProfilePage() {
                 <span className="font-semibold">{reels?.length || 0}</span>{' '}
                 <span className="text-muted-foreground">reels</span>
               </div>
+              <Link
+                to="/profile/$principalId/followers"
+                params={{ principalId }}
+                className="hover:underline cursor-pointer"
+              >
+                <span className="font-semibold">{followerCount ? Number(followerCount) : 0}</span>{' '}
+                <span className="text-muted-foreground">
+                  {followerCount && Number(followerCount) === 1 ? 'follower' : 'followers'}
+                </span>
+              </Link>
+              <Link
+                to="/profile/$principalId/following"
+                params={{ principalId }}
+                className="hover:underline cursor-pointer"
+              >
+                <span className="font-semibold">{followingCount ? Number(followingCount) : 0}</span>{' '}
+                <span className="text-muted-foreground">following</span>
+              </Link>
             </div>
           </div>
         </div>

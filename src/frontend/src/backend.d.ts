@@ -32,13 +32,20 @@ export enum UserRole {
 }
 export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    followUser(userToFollow: Principal): Promise<void>;
     getAllReels(): Promise<Array<Reel>>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getFeed(): Promise<Array<Reel>>;
+    getFollowerCount(user: Principal): Promise<bigint>;
+    getFollowers(user: Principal): Promise<Array<Principal>>;
+    getFollowing(user: Principal): Promise<Array<Principal>>;
+    getFollowingCount(user: Principal): Promise<bigint>;
     getReel(id: bigint): Promise<Reel>;
     getReelsByUploader(uploader: Principal): Promise<Array<Reel>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    unfollowUser(userToUnfollow: Principal): Promise<void>;
     uploadReel(video: ExternalBlob, description: string): Promise<bigint>;
 }

@@ -125,14 +125,21 @@ export interface backendInterface {
     _caffeineStorageUpdateGatewayPrincipals(): Promise<void>;
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    followUser(userToFollow: Principal): Promise<void>;
     getAllReels(): Promise<Array<Reel>>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getFeed(): Promise<Array<Reel>>;
+    getFollowerCount(user: Principal): Promise<bigint>;
+    getFollowers(user: Principal): Promise<Array<Principal>>;
+    getFollowing(user: Principal): Promise<Array<Principal>>;
+    getFollowingCount(user: Principal): Promise<bigint>;
     getReel(id: bigint): Promise<Reel>;
     getReelsByUploader(uploader: Principal): Promise<Array<Reel>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    unfollowUser(userToUnfollow: Principal): Promise<void>;
     uploadReel(video: ExternalBlob, description: string): Promise<bigint>;
 }
 import type { ExternalBlob as _ExternalBlob, Reel as _Reel, UserProfile as _UserProfile, UserRole as _UserRole, _CaffeineStorageRefillInformation as __CaffeineStorageRefillInformation, _CaffeineStorageRefillResult as __CaffeineStorageRefillResult } from "./declarations/backend.did.d.ts";
@@ -250,6 +257,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async followUser(arg0: Principal): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.followUser(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.followUser(arg0);
+            return result;
+        }
+    }
     async getAllReels(): Promise<Array<Reel>> {
         if (this.processError) {
             try {
@@ -290,6 +311,76 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.getCallerUserRole();
             return from_candid_UserRole_n18(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getFeed(): Promise<Array<Reel>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getFeed();
+                return from_candid_vec_n10(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getFeed();
+            return from_candid_vec_n10(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getFollowerCount(arg0: Principal): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getFollowerCount(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getFollowerCount(arg0);
+            return result;
+        }
+    }
+    async getFollowers(arg0: Principal): Promise<Array<Principal>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getFollowers(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getFollowers(arg0);
+            return result;
+        }
+    }
+    async getFollowing(arg0: Principal): Promise<Array<Principal>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getFollowing(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getFollowing(arg0);
+            return result;
+        }
+    }
+    async getFollowingCount(arg0: Principal): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getFollowingCount(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getFollowingCount(arg0);
+            return result;
         }
     }
     async getReel(arg0: bigint): Promise<Reel> {
@@ -359,6 +450,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.saveCallerUserProfile(await to_candid_UserProfile_n20(this._uploadFile, this._downloadFile, arg0));
+            return result;
+        }
+    }
+    async unfollowUser(arg0: Principal): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.unfollowUser(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.unfollowUser(arg0);
             return result;
         }
     }

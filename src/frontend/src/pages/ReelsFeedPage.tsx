@@ -1,10 +1,10 @@
-import { useGetAllReels } from '../hooks/useQueries';
+import { useGetFeed } from '../hooks/useQueries';
 import ReelCard from '../components/ReelCard';
 import { Loader2 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
 export default function ReelsFeedPage() {
-  const { data: reels, isLoading } = useGetAllReels();
+  const { data: reels, isLoading } = useGetFeed();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
